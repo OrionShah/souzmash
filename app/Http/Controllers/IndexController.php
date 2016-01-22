@@ -33,6 +33,9 @@ class IndexController extends Controller
 
     public function getRegister()
     {
+        if (Auth::check()) {
+            return redirect('/');
+        }
         $menu = [
             ["text"=> "Главная", "link" => "/"],
             ["text"=> "link2", "link" => "/link2"],
@@ -41,29 +44,33 @@ class IndexController extends Controller
         return view('register', ["menus" => $menu]);
     }
 
-    public function postRegister(Request $req)
+    public function postLogin(Request $req)
     {
-        print_r('expression');die;
+        $email = $req->input("email");
+        $password = $req->input("password");
         $valid = $this->validate($req, [
-            'name' => 'required|max:255',
             'email' => 'required|email',
-            'password' => 'required|min:8',
-            'password_again' => 'required'
+            'password' => 'required',
         ]);
-        print_r($valid);die;
-        return "Проверка пройдена";
+        $user = Auth::attempt(['email' => $email, 'password' => $password], true);
+        if ($user) {
+            return redirect('/');
+        } else {
+            return redirect('/');
+        }
     }
 
-
-    public function postLogin()
+    public function postLogout()
     {
-
+        Auth::logout();
+        return redirect('/');
     }
 
     public function getTest()
     {
-        
-        var_dump(Auth::check());
+        echo "<pre>";
+        print_r(Auth::check() . "<br>");
+        print_r(Auth::user());die;
     }
 
     public function postIndex(Request $req)

@@ -21,7 +21,6 @@
             <label for="password_confirmation">Повторите пароль: </label>
             <input class="form-control" type="password" name="password_confirmation" placeholder="Повторите пароль">
         </div>
-        <!-- <input type="hidden" name="_token" value="{{csrf_token()}}"/> -->
         <button type="submit" class="btn btn-default">Зарегистрироваться</button>
     </form>
     @if (count($errors) > 0)

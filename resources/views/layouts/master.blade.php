@@ -14,9 +14,13 @@
                 </div>
                 <div class="col-md-4">
                     @if (Auth::check())
-                        Вы вошли
+                        Добро пожаловать, {{Auth::user()->name}}
+                        <form method="POST" action="/logout">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <button type="submit" class="btn btn-default">Выйти</button>
+                        </form>
                     @else
-                        <form method="POST" action="/auth/login" class="form-inline">
+                        <form method="POST" action="/login" class="form-inline login_form">
                             <input class="form-control" type="email" name="email" placeholder="E-mail"><br>
                             <input class="form-control" type="password" name="password" placeholder="Пароль">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">

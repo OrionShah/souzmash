@@ -12,7 +12,6 @@ div {
     border:1px solid black;
 }
 .menu_link {
-    /*display: inline-block;*/
     list-style: none;
     width: 90%;
     padding: 5px 10px;
@@ -26,4 +25,8 @@ div {
 .error {
     color: red;
     list-style: none;
+}
+
+.login_form {
+
 }
