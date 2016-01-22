@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Союз машиностроителей - @yield('title')</title>
-        <link rel="stylesheet" type="text/css" href="styles/style.css">
-        <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/styles/style.css">
+        <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
     </head>
     <body>
         <div class="container">
