@@ -1,0 +1,29 @@
+div {
+    /*border:1px solid black;*/
+}
+.head_menu {
+
+}
+.logo {
+    font-size: 15pt;
+    text-align: center;
+}
+.sidebar {
+    border:1px solid black;
+}
+.menu_link {
+    /*display: inline-block;*/
+    list-style: none;
+    width: 90%;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border: 1px solid black;
+}
+.register_form {
+    margin: 15px auto;
+}
+
+.error {
+    color: red;
+    list-style: none;
+}
