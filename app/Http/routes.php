@@ -29,7 +29,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 |
 */
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
     Route::controller('/', "AdminController");
 });
 

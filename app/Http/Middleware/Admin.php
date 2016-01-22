@@ -18,13 +18,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        print_r('expression');die;
-        var_dump(Auth::user());die;
-        // if (Auth::check()) {
-            // if (Auth::user()->is_admin) {
+        if (Auth::check()) {
+            if (Auth::user()->is_admin) {
                 return $next($request);
-            // }
-        // }
-        // return redirect('/');
+            }
+        }
+        return redirect('/');
     }
 }
