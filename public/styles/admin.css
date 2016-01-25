@@ -1,3 +1,7 @@
 div {
 	border:1px solid black;
 }
+.new_record {
+    float:right;
+    margin: 10px;
+}
