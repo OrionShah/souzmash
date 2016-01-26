@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Администрация - @yield('title')</title>
-	<link rel="stylesheet" type="text/css" href="/styles/admin.css">
-        <link rel="stylesheet" type="text/css" href="/styles/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('/styles/admin.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/styles/bootstrap.min.css') }}">
 </head>
 <body>
 	<div class="container">
