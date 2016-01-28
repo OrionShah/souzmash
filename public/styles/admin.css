@@ -5,3 +5,7 @@ div {
     float:right;
     margin: 10px;
 }
+
+#delete_form {
+    margin: 10px 0;
+}

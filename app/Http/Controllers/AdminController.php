@@ -13,6 +13,8 @@ use Auth;
 
 class AdminController extends Controller
 {
+    private $allowed_fields = ['title', 'content', 'is_publish', 'preview', 'comments', 'author'];
+
     public function getIndex()
     {
         return view('admin.index');
@@ -69,9 +71,34 @@ class AdminController extends Controller
         return view("admin.edit", $options);
     }
 
-    public function postNews($action)
+    public function postNews($action, Request $req)
     {
-        print_r($action);die;
+        $data = $req->all();
+        $record = news::find($data['id']);
+        if ($action == "delete") {
+            $record->delete();
+            return redirect('/admin/news/');
+        }
+        if ($action == "edit") {
+            if (!isset($data['is_publish'])) {
+                $data['is_publish'] = (bool)0;
+            } else {
+                $data['is_publish'] = (bool)1;
+            }
+            if(!isset($data['commnets'])) {
+                $data['commnets'] = (bool)0;
+            } else {
+                $data['commnets'] = (bool)1;
+            }
+            $data['content'] = (string)$data['editor'];
+            foreach ($data as $key => $value) {
+                if (in_array($key, $this->allowed_fields)) {
+                    $record[$key] = $value;
+                }
+            }
+            $record->save();
+            return redirect("/admin/news/edit/" . $data['id']);
+        }
     }
 
     public function getAddNew()
@@ -98,9 +125,9 @@ class AdminController extends Controller
         // echo "<pre>";
         // print_r($data);die;
         $new_record = new news;
-        $allowed_fields = ['title', 'content', 'is_publish', 'preview', 'comments', 'author'];
+        
         foreach ($data as $key => $value) {
-        	if (in_array($key, $allowed_fields)) {
+        	if (in_array($key, $this->allowed_fields)) {
         		$new_record[$key] = $value;
         	}
         }

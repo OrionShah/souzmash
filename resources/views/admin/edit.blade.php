@@ -4,8 +4,9 @@
 
 @section('content')
 
-    <form method="POST" action="/admin/edit">
+    <form method="POST" action="/admin/news/edit">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="id" value="{{$new->id}}">
         <div class="row">
             <div class="form-group col-md-8">
             <label for="title">Заголовок</label>
@@ -13,7 +14,12 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="is_publish">Отображать на сайте</label>
-                <input type="checkbox" name="is_publish" id="is_publish" value="{{$new->is_publish}}">
+                @if ($new->is_publish)
+                    <input type="checkbox" name="is_publish" id="is_publish" checked>
+                @else
+                    <input type="checkbox" name="is_publish" id="is_publish">
+                @endif
+                
             </div>
         </div>
         <div class="form-group">
@@ -27,11 +33,19 @@
         </div>
         <div class="form-group">
             <label for="comments">Разрашить комментарии?</label>
-            <input type="checkbox" name="comments" id="comments" value="{{$new->comments}}">
+            @if ($new->comments)
+                <input type="checkbox" name="comments" id="comments" checked>
+            @else
+                <input type="checkbox" name="comments" id="comments">
+            @endif
+            
         </div>
         <button type="submit" class="btn btn-submit">Сохранить</button>
     </form>
-    <form method="DELETE" action="/admin/delete">
+
+    <form id="delete_form" method="POST" action="/admin/news/delete">
+        <input class="form-control" type="hidden" name="_token" value="{{csrf_token()}}">
+        <input class="form-control" type="hidden" name="id" value="{{$new->id}}">
         <button type="submit" class="btn btn-danger">Удалить</button>
     </form>
 
