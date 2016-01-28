@@ -50,10 +50,8 @@ class AdminController extends Controller
         $count = $news->count();
         foreach ($news as $new) {
             $new->author = User::find($new->author)->name;
-
-            // $new->created_at = date('H:i d.m.Y', $new->created_at);
-            // $new->updated_at = date('H:i d.m.Y', $new->updated_at);
         }
+
         $options = [
             "news" => $news,
             "count" => $count
