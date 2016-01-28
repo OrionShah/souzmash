@@ -8,6 +8,8 @@
         <tr>
             <th>Заголовок</th>
             <th>Автор</th>
+            <th>Создано</th>
+            <th>Обновлено</th>
             <th>#</th>
         </tr>
         @if($count > 0)
@@ -15,7 +17,11 @@
                 <tr>
                     <td>{{$new->title}}</td>
                     <td>{{$new->author}}</td>
-                    <td></td>
+                    <td>{{$new->created_at}}</td>
+                    <td>{{$new->updated_at}}</td>
+                    <td>
+                        <a href="/admin/news/edit/{{$new->id}}">Р</a>
+                    </td>
                 </tr>
             @endforeach
         @else

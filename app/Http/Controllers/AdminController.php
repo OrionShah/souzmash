@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\news;
+use App\User;
 
 use Auth;
 
@@ -17,7 +18,7 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    public function getNews($action = "get")
+    public function getNews($action = "get", $id = null)
     {
         switch ($action) {
             case 'get':
@@ -25,6 +26,9 @@ class AdminController extends Controller
                 break;
             case 'new':
                 return $this->showAddPage();
+                break;
+            case 'edit':
+                return $this->showEditPage($id);
                 break;
             default:
                 # code...
@@ -42,11 +46,27 @@ class AdminController extends Controller
     {
         $news = news::all();
         $count = $news->count();
+        foreach ($news as $new) {
+            $new->author = User::find($new->author)->name;
+
+            // $new->created_at = date('H:i d.m.Y', $new->created_at);
+            // $new->updated_at = date('H:i d.m.Y', $new->updated_at);
+        }
         $options = [
             "news" => $news,
             "count" => $count
         ];
         return view('admin.news', $options);
+    }
+
+    public function showEditPage($id)
+    {
+        $new = news::find($id);
+        $new->content = trim($new->content);
+        $options = [
+            'new' => $new
+        ];
+        return view("admin.edit", $options);
     }
 
     public function postNews($action)
@@ -62,7 +82,7 @@ class AdminController extends Controller
     public function postAddnew(Request $request)
     {
         $data = $request->all();
-        $data['editor'] = htmlspecialchars($data['editor']);
+        // $data['editor'] = htmlspecialchars($data['editor']);
         if (!isset($data['is_publish'])) {
         	$data['is_publish'] = (bool)0;
         } else {
