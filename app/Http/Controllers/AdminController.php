@@ -39,6 +39,19 @@ class AdminController extends Controller
         
     }
 
+    public function getUsers($action = "get")
+    {
+        switch ($action) {
+            case 'get':
+                return $this->showUsersList();
+                break;
+            
+            default:
+                # code...
+                break;
+        }
+    }
+
     public function showAddPage()
     {
         return view('admin.add');
@@ -46,7 +59,7 @@ class AdminController extends Controller
 
     public function showNewsList()
     {
-        $news = news::all();
+        $news = news::paginate(10);
         $count = $news->count();
         foreach ($news as $new) {
             $new->author = User::find($new->author)->name;
@@ -131,5 +144,26 @@ class AdminController extends Controller
         }
         $new_record->save();
         return redirect('admin/news');
+    }
+
+    public function showUsersList()
+    {
+        
+        $users = User::paginate(10);
+
+        $options = [
+            'users' => $users,
+        ];
+
+        return view("admin.users", $options);
+    }
+
+    public function postChangeadminstatus($user_id)
+    {
+        $user = User::find($user_id);
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
+        return redirect('admin/users');
     }
 }

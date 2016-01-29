@@ -9,3 +9,7 @@ div {
 #delete_form {
     margin: 10px 0;
 }
+
+#users th, #users td {
+    text-align: center;
+}
