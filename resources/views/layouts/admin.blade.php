@@ -4,6 +4,7 @@
 	<title>Администрация - @yield('title')</title>
 	<link rel="stylesheet" type="text/css" href="{{ asset('/styles/admin.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/styles/bootstrap.min.css') }}">
+        <link href="{{ asset('/styles/colorbox.css') }}" rel="stylesheet">
 </head>
 <body>
 	<div class="container">

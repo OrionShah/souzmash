@@ -13,7 +13,7 @@ use Auth;
 
 class AdminController extends Controller
 {
-    private $allowed_fields = ['title', 'content', 'is_publish', 'preview', 'comments', 'author'];
+    private $allowed_fields = ['title', 'content', 'is_publish', 'preview_image', 'comments', 'author'];
 
     public function getIndex()
     {
@@ -54,6 +54,9 @@ class AdminController extends Controller
 
     public function showAddPage()
     {
+        $options = [
+            // $url => URL::action('Barryvdh\Elfinder\ElfinderController@showConnector')
+        ];
         return view('admin.add');
     }
 

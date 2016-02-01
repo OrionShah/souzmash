@@ -13,3 +13,7 @@ div {
 #users th, #users td {
     text-align: center;
 }
+
+iframe {
+    border: 1px solid black;
+}

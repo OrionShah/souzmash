@@ -18,7 +18,9 @@
         </div>
         <div class="form-group">
             <label for="preview_image">Превью изображение</label>
-            <input type="file" class="form-control" id="preview_image" name="preview_image">
+            <input type="text" class="form-control" id="preview_image" name="preview_image">
+            <!-- <button id="showEl"  data-inputid="preview_image">Выбрать изображение</button> -->
+            <a href="" class="popup_selector" data-inputid="preview_image">Select Image</a>
         </div>
         <div class="form-group">
             <label for="editor">Контент</label>
@@ -32,12 +34,20 @@
         <button type="submit" class="btn btn-submit">Сохранить</button>
     </form>
 
+
+    <div id="elfinder"></div>
+
     <script src="{{ asset('/js/jquery.min.js') }}" type="text/javascript" charset="utf-8" ></script>
     <script src="{{ asset('/js/ckeditor/ckeditor.js') }}" type="text/javascript" charset="utf-8" ></script>
-    <script type="text/javascript" src="{{ asset('/packages/barryvdh/elfinder/js/standalonepopup.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/jquery.colorbox-min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/packages/barryvdh/elfinder/js/standalonepopup.min.js') }}"></script> 
+
+
     <script>
         var editor = CKEDITOR.replace('editor',
             {filebrowserBrowseUrl : '/elfinder/ckeditor'}
         );
+
+        // 
     </script>
 @endsection
