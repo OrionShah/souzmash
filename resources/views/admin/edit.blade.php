@@ -54,11 +54,16 @@
     <script src="{{ asset('/js/ckeditor/ckeditor.js') }}" type="text/javascript" charset="utf-8" ></script>
     <script type="text/javascript" src="{{ asset('/js/jquery.colorbox-min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/packages/barryvdh/elfinder/js/standalonepopup.min.js') }}"></script>
+    <script type="text/template" id="content">
+        {!! $new->content !!}
+    </script>
     <script>
         var editor = CKEDITOR.replace('editor',
             {filebrowserBrowseUrl : '/elfinder/ckeditor'}
         );
-        
-        CKEDITOR.instances.editor.setData("{!! $new->content !!}");
+        content = $('#content').html();
+        console.log(content);
+        CKEDITOR.instances.editor.setData(content);
     </script>
+
 @endsection

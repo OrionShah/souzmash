@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -25,11 +27,7 @@ class IndexController extends Controller
      */
     public function getIndex()
     {
-        $menu = [
-            ["text"=> "Главная", "link" => "/"],
-            ["text"=> "link2", "link" => "/link2"],
-            ["text"=> "link3", "link" => "/link3"]
-        ];
+        $menu = $this->menus();
         $posts = news::paginate(10);
         foreach ($posts as $key => $post) {
             if (strlen($post->content) > 150) {
@@ -50,11 +48,7 @@ class IndexController extends Controller
         if (Auth::check()) {
             return redirect('/');
         }
-        $menu = [
-            ["text"=> "Главная", "link" => "/"],
-            ["text"=> "link2", "link" => "/link2"],
-            ["text"=> "link3", "link" => "/link3"]
-        ];
+        $menu = $this->menus();
         return view('register', ["menus" => $menu]);
     }
 
@@ -74,6 +68,20 @@ class IndexController extends Controller
         }
     }
 
+    public function getPost($id)
+    {
+        $post = news::find($id);
+        if (!$post) {
+            return;
+        }
+
+        $options = [
+            'post' => $post,
+            'menus' => $this->menus(),
+        ];
+        return view('post', $options);
+    }
+
     public function postLogout()
     {
         Auth::logout();
@@ -90,5 +98,15 @@ class IndexController extends Controller
     public function postIndex(Request $req)
     {
        return ['text' => 'Совсем с ума сошел?'];
+    }
+
+    public function menus()
+    {
+        $menu = [
+            ["text"=> "Главная", "link" => "/"],
+            ["text"=> "link2", "link" => "/link2"],
+            ["text"=> "link3", "link" => "/link3"]
+        ];
+        return $menu;
     }
 }

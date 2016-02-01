@@ -6,7 +6,8 @@
     <a class="" href="/admin/news/new"><button class="new_record btn btn-submit">Добавить новость</button></a>
     <table class="table">
         <tr>
-            <th>ID</th>
+            <th>№</th>
+            <!-- <th>ID</th> -->
             <th>Заголовок</th>
             <th>Автор</th>
             <th>Создано</th>
@@ -14,9 +15,10 @@
             <th>#</th>
         </tr>
         @if($count > 0)
-            @foreach($news as $new)
+            @foreach($news as $key => $new)
                 <tr>
-                    <td>{{$new->id}}</td>
+                    <td>{{ $key+1 }}</td>
+                    <!-- <td>{{$new->id}}</td> -->
                     <td>{{$new->title}}</td>
                     <td>{{$new->author}}</td>
                     <td>{{$new->created_at}}</td>
