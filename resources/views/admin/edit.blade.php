@@ -62,7 +62,6 @@
             {filebrowserBrowseUrl : '/elfinder/ckeditor'}
         );
         content = $('#content').html();
-        console.log(content);
         CKEDITOR.instances.editor.setData(content);
     </script>
 

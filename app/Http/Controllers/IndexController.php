@@ -12,13 +12,10 @@ use App\Http\Controllers\Controller;
 use Auth;
 
 use App\news;
+use App\Comments;
 
 class IndexController extends Controller
 {
-    // function __construct()
-    // {
-        // $this->middleware('auth', ["only" => ]);
-    // }
     
     /**
      * Метод главной страницы
@@ -28,7 +25,7 @@ class IndexController extends Controller
     public function getIndex()
     {
         $menu = $this->menus();
-        $posts = news::paginate(10);
+        $posts = news::where('is_publish', '=', '1')->paginate(10);
         foreach ($posts as $key => $post) {
             if (strlen($post->content) > 150) {
                 $post->content = substr($post->content, 0, 100) . "...";
@@ -72,13 +69,27 @@ class IndexController extends Controller
     {
         $post = news::find($id);
         if (!$post) {
-            return;
+            return redirect('/');
+        }
+
+        if (!$post->is_publish) {
+            return redirect('/');
         }
 
         $options = [
             'post' => $post,
             'menus' => $this->menus(),
         ];
+        if ($post->comments) {
+            $comments = Comments::where('post', '=', $post->id);
+            $comments_array = $comments->get();
+            foreach ($comments_array as $key => $comment) {
+                $comment->time = $comment->created_at->format("d.m.Y H:i");
+                $comments_array[$key] = $comment;
+            }
+            $options['comments_count'] = $comments->count();
+            $options['comments'] = $comments_array;
+        }
         return view('post', $options);
     }
 
@@ -108,5 +119,19 @@ class IndexController extends Controller
             ["text"=> "link3", "link" => "/link3"]
         ];
         return $menu;
+    }
+
+    public function postComment(Request $req)
+    {
+        if (!Auth::check()) {
+            return redirect("/post/".$req->input('id'));
+        }
+        $data = $req->all();
+        $comment = new Comments;
+        $comment->post = $data['id'];
+        $comment->text = $data['text'];
+        $comment->author = Auth::user()->id;
+        $comment->save();
+        return redirect("/post/".$req->input('id'));
     }
 }

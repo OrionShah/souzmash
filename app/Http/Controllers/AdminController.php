@@ -54,9 +54,6 @@ class AdminController extends Controller
 
     public function showAddPage()
     {
-        $options = [
-            // $url => URL::action('Barryvdh\Elfinder\ElfinderController@showConnector')
-        ];
         return view('admin.add');
     }
 
@@ -99,10 +96,10 @@ class AdminController extends Controller
             } else {
                 $data['is_publish'] = (bool)1;
             }
-            if(!isset($data['commnets'])) {
-                $data['commnets'] = (bool)0;
+            if(!isset($data['comments'])) {
+                $data['comments'] = (bool)0;
             } else {
-                $data['commnets'] = (bool)1;
+                $data['comments'] = (bool)1;
             }
             $data['content'] = (string)$data['editor'];
             foreach ($data as $key => $value) {
@@ -123,28 +120,27 @@ class AdminController extends Controller
     public function postAddnew(Request $request)
     {
         $data = $request->all();
-        // $data['editor'] = htmlspecialchars($data['editor']);
         if (!isset($data['is_publish'])) {
         	$data['is_publish'] = (bool)0;
         } else {
         	$data['is_publish'] = (bool)1;
         }
-        if(!isset($data['commnets'])) {
-        	$data['commnets'] = (bool)0;
+
+        if(!isset($data['comments'])) {
+        	$data['comments'] = (bool)0;
         } else {
-        	$data['commnets'] = (bool)1;
+        	$data['comments'] = (bool)1;
         }
+
         $data['content'] = (string)$data['editor'];
         $data['author'] = Auth::user()->id;
-        // echo "<pre>";
-        // print_r($data);die;
         $new_record = new news;
-        
         foreach ($data as $key => $value) {
         	if (in_array($key, $this->allowed_fields)) {
         		$new_record[$key] = $value;
         	}
         }
+
         $new_record->save();
         return redirect('admin/news');
     }

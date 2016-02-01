@@ -17,6 +17,9 @@
                         Добро пожаловать, {{Auth::user()->name}}
                         <form method="POST" action="/logout">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            @if (Auth::user()->is_admin)
+                            <a class="btn btn-default" href="/admin">Админ</a>
+                            @endif
                             <button type="submit" class="btn btn-default">Выйти</button>
                         </form>
                     @else
