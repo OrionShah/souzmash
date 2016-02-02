@@ -12,8 +12,18 @@
         @if ($comments_count > 0)
             @foreach ($comments as $comment)
                 <div class="comment col-md-12">
-                    <div class="author col-md-4">{{$comment->author}}</div>
-                    <div class="time col-md-8">{{$comment->time}}</div>
+                    <div class="author col-md-4">{{ $comment->author }}</div>
+                    <div class="buttons col-md-4">
+                        @if (Auth::check() && $comment->author == Auth::user()->name)
+                        <form class="form" action="/delcomment" method="post">
+                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="user" value="{{$comment->author}}">
+                            <input type="hidden" name="comment_Id" value="{{$comment->id}}">
+                            <button class="btn btn-submit" type="submit">D</button>
+                        </form>
+                        @endif
+                    </div>
+                    <div class="time col-md-4">{{ $comment->time }}</div>
                     <div class="text col-md-12">{{ $comment->text }}</div>
                 </div>
             @endforeach

@@ -134,4 +134,23 @@ class IndexController extends Controller
         $comment->save();
         return redirect("/post/".$req->input('id'));
     }
+
+    public function postDelcomment(Request $req)
+    {
+        if (!Auth::check()) {
+            return back();
+        }
+
+        $data = $req->all();
+        $comment = Comments::find($data['comment_Id']);
+        if (!$comment) return back();
+
+        if ($comment->author != $data['user'] && !Auth::user()->is_admin) {
+            return back();
+        }
+
+        $comment->delete();
+
+        return back();
+    }
 }

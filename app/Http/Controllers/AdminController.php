@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\news;
 use App\User;
+use App\Comments;
 
 use Auth;
 
@@ -17,7 +18,16 @@ class AdminController extends Controller
 
     public function getIndex()
     {
-        return view('admin.index');
+        $comments = Comments::take(5)->get();
+        foreach ($comments as $key => $comment) {
+            $comment->post_id = $comment->getPostId();
+            // print_r($comment->getPostId());die;
+            $comments[$key] = $comment;
+        }
+        $options = [
+            'comments' => $comments
+        ];
+        return view('admin.index', $options);
     }
 
     public function getNews($action = "get", $id = null)

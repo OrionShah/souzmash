@@ -19,4 +19,16 @@ class Comments extends Model
         $user = User::find($value);
         return $user->name;
     }
+
+
+    public function getPostId()
+    {
+        return $this->attributes['post'];
+    }
+
+    public function getPostAttribute($value)
+    {
+        $post = news::find($value);
+        return $post->title;
+    }
 }
