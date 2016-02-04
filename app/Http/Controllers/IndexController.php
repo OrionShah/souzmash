@@ -17,7 +17,7 @@ use App\Page;
 
 class IndexController extends Controller
 {
-    
+
     /**
      * Метод главной страницы
      *
@@ -28,15 +28,18 @@ class IndexController extends Controller
         if ($link) {
             return $this->getStaticPage($link);
         }
+
         $menu = $this->menus();
         $posts = news::where('is_publish', '=', '1')->paginate(10);
         foreach ($posts as $key => $post) {
             if (strlen($post->content) > 150) {
                 $post->content = substr($post->content, 0, 100) . "...";
             }
+
             $post->time = $post->created_at->format('d.m.Y H:i');
             $posts[$key] = $post;
         }
+
         $options = [
             'menus' => $menu,
             'posts' => $posts
@@ -49,6 +52,7 @@ class IndexController extends Controller
         if (Auth::check()) {
             return redirect('/');
         }
+
         $menu = $this->menus();
         return view('register', ["menus" => $menu]);
     }
@@ -56,17 +60,14 @@ class IndexController extends Controller
     public function postLogin(Request $req)
     {
         $email = $req->input("email");
-        $password = $req->input("password");
-        $valid = $this->validate($req, [
+        $pass = $req->input("password");
+        $rules = [
             'email' => 'required|email',
             'password' => 'required',
-        ]);
-        $user = Auth::attempt(['email' => $email, 'password' => $password], true);
-        if ($user) {
-            return redirect('/');
-        } else {
-            return redirect('/');
-        }
+        ];
+        $valid = $this->validate($req, $rules);
+        $user = Auth::attempt(['email' => $email, 'password' => $pass], true);
+        return redirect('/');
     }
 
     public function getPost($id)
@@ -91,9 +92,11 @@ class IndexController extends Controller
                 $comment->time = $comment->created_at->format("d.m.Y H:i");
                 $comments_array[$key] = $comment;
             }
+
             $options['comments_count'] = $comments->count();
             $options['comments'] = $comments_array;
         }
+
         return view('post', $options);
     }
 
@@ -103,22 +106,10 @@ class IndexController extends Controller
         return redirect('/');
     }
 
-    public function getTest()
-    {
-        echo "<pre>";
-        print_r(Auth::check() . "<br>");
-        print_r(Auth::user());die;
-    }
-
-    public function postIndex(Request $req)
-    {
-       return ['text' => 'Совсем с ума сошел?'];
-    }
-
     public function menus()
     {
         $menu = [
-            ["text"=> "Главная", "link" => "/"],
+            ["text" => "Главная", "link" => "/"],
         ];
         $pages = Page::where('is_publish', '=', true)->get();
         foreach ($pages as $page) {
@@ -127,6 +118,7 @@ class IndexController extends Controller
                 "link" => $page->link
             ];
         }
+
         return $menu;
     }
 
@@ -135,6 +127,7 @@ class IndexController extends Controller
         if (!Auth::check()) {
             return redirect("/post/".$req->input('id'));
         }
+
         $data = $req->all();
         $comment = new Comments;
         $comment->post = $data['id'];
@@ -152,7 +145,9 @@ class IndexController extends Controller
 
         $data = $req->all();
         $comment = Comments::find($data['comment_Id']);
-        if (!$comment) return back();
+        if (!$comment) {
+            return back();
+        }
 
         if ($comment->author != $data['user'] && !Auth::user()->is_admin) {
             return back();
@@ -169,7 +164,7 @@ class IndexController extends Controller
         // if (!$page->is_publish) {
         //     return redirect('/');
         // }
-        
+
         $options = [
             'menus' => $this->menus(),
             'page' => $page,
