@@ -166,6 +166,10 @@ class IndexController extends Controller
     protected function getStaticPage($link)
     {
         $page = Page::where("link", "=", $link)->first();
+        // if (!$page->is_publish) {
+        //     return redirect('/');
+        // }
+        
         $options = [
             'menus' => $this->menus(),
             'page' => $page,
