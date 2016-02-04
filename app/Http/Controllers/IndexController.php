@@ -106,7 +106,7 @@ class IndexController extends Controller
         return redirect('/');
     }
 
-    public function menus()
+    public static function menus()
     {
         $menu = [
             ["text" => "Главная", "link" => "/"],

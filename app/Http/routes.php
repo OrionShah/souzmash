@@ -35,6 +35,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
 });
 
 Route::group(['middleware' => ['web']], function () {
+    Route::controller('/post/{id}', 'IndexPostController');
     Route::controller('/{link?}', 'IndexController');
 });
 
