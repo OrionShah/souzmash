@@ -17,7 +17,7 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->created_at}}</td>
                 <td>
-                    <form method="POST" action="/admin/changeadminstatus/{{$user->id}}">
+                    <form method="POST" action="/admin/users/adminstatus/{{$user->id}}">
                         {!! csrf_field() !!}
                         <button class="btn btn-info" type="submit">{{$user->is_admin}}</button>
                     </form>

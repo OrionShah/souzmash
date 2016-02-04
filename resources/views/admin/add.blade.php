@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form method="POST" action="/admin/addnew">
+    <form method="POST" action="/admin/news/new">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="row">
             <div class="form-group col-md-8">
