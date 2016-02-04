@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form method="POST" action="/admin/addnew">
+    <form method="POST" action="/admin/pages/new">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="row">
             <div class="form-group col-md-8">
@@ -12,23 +12,19 @@
                 <input type="text" name="title" id="title" class="form-control">
             </div>
             <div class="form-group col-md-4">
-                <label for="is_publish">Отображать на сайте</label>
+                <label for="is_publish">Отображать в меню</label>
                 <input type="checkbox" name="is_publish" id="is_publish">
             </div>
+            <div class="form-group col-md-12">
+                <label for="link">Ссылка</label>
+                <input class="form-control" type="text" name="link" id="link">
+            </div>
+
         </div>
-        <div class="form-group">
-            <label for="preview_image">Превью изображение</label>
-            <input type="text" class="form-control" id="preview_image" name="preview_image">
-            <!-- <button id="showEl"  data-inputid="preview_image">Выбрать изображение</button> -->
-            <a href="" class="popup_selector" data-inputid="preview_image">Select Image</a>
-        </div>
+
         <div class="form-group">
             <label for="editor">Контент</label>
             <textarea id="editor" name="editor"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="comments">Разрешить комментарии?</label>
-            <input type="checkbox" name="comments" id="comments">
         </div>
 
         <button type="submit" class="btn btn-submit">Сохранить</button>

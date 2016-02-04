@@ -30,10 +30,11 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 */
 
 Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function () {
+    Route::controller('/pages', "PagesController");
     Route::controller('/', "AdminController");
 });
 
 Route::group(['middleware' => ['web']], function () {
-    Route::controller('/', 'IndexController');
+    Route::controller('/{link?}', 'IndexController');
 });
 

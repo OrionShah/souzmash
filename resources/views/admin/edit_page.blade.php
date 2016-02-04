@@ -1,52 +1,43 @@
 @extends('layouts.admin')
 
-@section('title', "Редактирование")
+@section('title', "Редактирование страницы")
 
 @section('content')
 
-    <form method="POST" action="/admin/news/edit">
+    <form method="POST" action="/admin/pages/edit">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-        <input type="hidden" name="id" value="{{$new->id}}">
+        <input type="hidden" name="id" value="{{$page->id}}">
         <div class="row">
             <div class="form-group col-md-8">
             <label for="title">Заголовок</label>
-                <input type="text" name="title" id="title" class="form-control" value="{{$new->title}}">
+                <input type="text" name="title" id="title" class="form-control" value="{{$page->title}}">
             </div>
             <div class="form-group col-md-4">
-                <label for="is_publish">Отображать на сайте</label>
-                @if ($new->is_publish)
+                <label for="is_publish">Отображать в меню</label>
+                @if ($page->is_publish)
                     <input type="checkbox" name="is_publish" id="is_publish" checked>
                 @else
                     <input type="checkbox" name="is_publish" id="is_publish">
                 @endif
-                
+            </div>
+            <div class="form-group col-md-12">
+                <label for="link">Ссылка</label>
+                <input class="form-control" type="text" name="link" id="link" value="{{$page->link}}">
             </div>
         </div>
-        <div class="form-group">
-            <label for="preview_image">Превью изображение</label>
-            <input type="text" class="form-control" id="preview_image" name="preview_image" value="{{ $new->preview_image }}">
-            <a href="" class="popup_selector" data-inputid="preview_image">Select Image</a>
-        </div>
+
         <div class="form-group">
             <label for="editor">Контент</label>
-            <textarea id="editor" name="editor" value="{{$new->content}}"></textarea>
-            <!-- {{$new->content}} -->
+            <textarea id="editor" name="editor" value="{{$page->content}}"></textarea>
+            <!-- {{$page->content}} -->
         </div>
-        <div class="form-group">
-            <label for="comments">Разрашить комментарии?</label>
-            @if ($new->comments)
-                <input type="checkbox" name="comments" id="comments" checked>
-            @else
-                <input type="checkbox" name="comments" id="comments">
-            @endif
-            
-        </div>
+
         <button type="submit" class="btn btn-submit">Сохранить</button>
     </form>
 
-    <form id="delete_form" method="POST" action="/admin/news/delete">
+    <form id="delete_form" method="POST" action="/admin/pages/delete">
         <input class="form-control" type="hidden" name="_token" value="{{csrf_token()}}">
-        <input class="form-control" type="hidden" name="id" value="{{$new->id}}">
+        <input class="form-control" type="hidden" name="id" value="{{$page->id}}">
         <button type="submit" class="btn btn-danger">Удалить</button>
     </form>
 
@@ -55,7 +46,7 @@
     <script type="text/javascript" src="{{ asset('/js/jquery.colorbox-min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/packages/barryvdh/elfinder/js/standalonepopup.min.js') }}"></script>
     <script type="text/template" id="content">
-        {!! $new->content !!}
+        {!! $page->content !!}
     </script>
     <script>
         var editor = CKEDITOR.replace('editor',

@@ -13,6 +13,7 @@ use Auth;
 
 use App\news;
 use App\Comments;
+use App\Page;
 
 class IndexController extends Controller
 {
@@ -22,8 +23,11 @@ class IndexController extends Controller
      *
      * @return view главная
      */
-    public function getIndex()
+    public function getIndex($link = false)
     {
+        if ($link) {
+            return $this->getStaticPage($link);
+        }
         $menu = $this->menus();
         $posts = news::where('is_publish', '=', '1')->paginate(10);
         foreach ($posts as $key => $post) {
@@ -115,9 +119,14 @@ class IndexController extends Controller
     {
         $menu = [
             ["text"=> "Главная", "link" => "/"],
-            ["text"=> "link2", "link" => "/link2"],
-            ["text"=> "link3", "link" => "/link3"]
         ];
+        $pages = Page::where('is_publish', '=', true)->get();
+        foreach ($pages as $page) {
+            $menu[] = [
+                "text" => $page->title,
+                "link" => $page->link
+            ];
+        }
         return $menu;
     }
 
@@ -152,5 +161,15 @@ class IndexController extends Controller
         $comment->delete();
 
         return back();
+    }
+
+    protected function getStaticPage($link)
+    {
+        $page = Page::where("link", "=", $link)->first();
+        $options = [
+            'menus' => $this->menus(),
+            'page' => $page,
+        ];
+        return view("static", $options);
     }
 }

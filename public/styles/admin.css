@@ -6,6 +6,10 @@ div {
     margin: 10px;
 }
 
+#pages th, #pages td {
+    text-align: center;
+}
+
 #delete_form {
     margin: 10px 0;
 }
