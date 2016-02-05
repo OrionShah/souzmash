@@ -16,6 +16,8 @@
 // Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
+Route::get('register', 'IndexController@getRegister');
+// Route::post('login', 'IndexController@postLogin');
 
 
 /*
@@ -35,9 +37,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['web', 'admin']], function (
     Route::controller('/users', "UsersController");
     Route::controller('/', "AdminController");
 });
-
+Route::group(['middleware' => ['static', 'web']], function () {
+    Route::get('/{link}', 'StaticPagesController@getStaticPage');
+});
 Route::group(['middleware' => ['web']], function () {
     Route::controller('/post/{id}', 'IndexPostController');
-    Route::controller('/{link?}', 'IndexController');
+    Route::controller('/', 'IndexController');
 });
 

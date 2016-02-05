@@ -23,12 +23,8 @@ class IndexController extends Controller
      *
      * @return view главная
      */
-    public function getIndex($link = false)
+    public function getIndex()
     {
-        if ($link) {
-            return $this->getStaticPage($link);
-        }
-
         $menu = $this->menus();
         $posts = news::where('is_publish', '=', '1')->paginate(10);
         foreach ($posts as $key => $post) {
@@ -115,7 +111,7 @@ class IndexController extends Controller
         foreach ($pages as $page) {
             $menu[] = [
                 "text" => $page->title,
-                "link" => $page->link
+                "link" => '/' . $page->link
             ];
         }
 
@@ -158,17 +154,5 @@ class IndexController extends Controller
         return back();
     }
 
-    protected function getStaticPage($link)
-    {
-        $page = Page::where("link", "=", $link)->first();
-        // if (!$page->is_publish) {
-        //     return redirect('/');
-        // }
-
-        $options = [
-            'menus' => $this->menus(),
-            'page' => $page,
-        ];
-        return view("static", $options);
-    }
+    
 }

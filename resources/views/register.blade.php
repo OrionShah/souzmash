@@ -23,11 +23,13 @@
         </div>
         <button type="submit" class="btn btn-default">Зарегистрироваться</button>
     </form>
-    @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li class="error">{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    <!-- @if (isset($errors)) -->
+        @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li class="error">{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
+    <!-- @endif -->
 @stop

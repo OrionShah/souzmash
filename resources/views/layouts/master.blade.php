@@ -29,12 +29,14 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <button type="submit" class="btn btn-default">Войти</button>
                         </form>
-                        @if (count($errors) > 0)
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li class="error">{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                        @if (isset($errors))
+                            @if (count($errors) > 0)
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li class="error">{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         @endif
                         <a href="/register">Зарегистрироваться</a>
                     @endif
