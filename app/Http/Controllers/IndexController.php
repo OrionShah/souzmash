@@ -28,8 +28,8 @@ class IndexController extends Controller
         $menu = $this->menus();
         $posts = news::where('is_publish', '=', '1')->paginate(10);
         foreach ($posts as $key => $post) {
-            if (strlen($post->content) > 150) {
-                $post->content = substr($post->content, 0, 100) . "...";
+            if (strlen($post->content) > 300) {
+                $post->content = substr($post->content, 0, 300) . "...";
             }
 
             $post->time = $post->created_at->format('d.m.Y H:i');
