@@ -11,7 +11,7 @@
         <div class="comments">
         @if ($comments_count > 0)
             @foreach ($comments as $comment)
-                <div class="comment col-md-12">
+                <div class="comment col-md-push-1 col-md-9">
                     <div class="author col-md-4">{{ $comment->author }}</div>
                     <div class="buttons col-md-4">
                         @if (Auth::check() && $comment->author == Auth::user()->name)
@@ -19,7 +19,7 @@
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" name="user" value="{{$comment->author}}">
                             <input type="hidden" name="comment_Id" value="{{$comment->id}}">
-                            <button class="btn btn-submit" type="submit">D</button>
+                            <button class="btn btn-danger" type="submit">Удалить</button>
                         </form>
                         @endif
                     </div>
@@ -29,13 +29,13 @@
             @endforeach
         @endif
         @if ( Auth::check())
-            <form class="form" id="new_comment" method="POST" action="/comment/{{$post->id}}">
+            <form class="form col-md-12" id="new_comment" method="POST" action="/comment/{{$post->id}}">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
                 <input type="hidden" name="id" value="{{$post->id}}">
                 <div class="form-group">
                     <label for="text">Введите комментарий</label>
                     <textarea class="form-control" name="text" id="text"></textarea>
-                    <button class="btn btn-submit">Отправить</button>
+                    <button class="btn btn-success">Отправить</button>
                 </div>
                 
             </form>

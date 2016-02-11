@@ -3,5 +3,7 @@
 @section('title', "$page->title")
 
 @section('content')
-    {!! $page->content !!}
+    <div class="content"> 
+        {!! $page->content !!}
+    </div>
 @endsection

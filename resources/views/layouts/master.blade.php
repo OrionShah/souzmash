@@ -2,19 +2,19 @@
 <html>
     <head>
         <title>Союз машиностроителей - @yield('title')</title>
-        <link rel="stylesheet" type="text/css" href="{{ asset('/styles/style.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('/styles/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/styles/style.css') }}">
     </head>
     <body>
         <div class="container">
             <div class="col-md-12">
                 <div class="col-md-3 logo">Союз машиностроителей</div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                     
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3 user">
                     @if (Auth::check())
-                        Добро пожаловать, {{Auth::user()->name}}
+                        Добро пожаловать,<br>{{Auth::user()->name}}
                         <form method="POST" action="/logout">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             @if (Auth::user()->is_admin)
@@ -28,6 +28,7 @@
                             <input class="form-control" type="password" name="password" placeholder="Пароль">
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <button type="submit" class="btn btn-default">Войти</button>
+                            <a href="/register"><button type="button" class="btn btn-default reg">Регистрация</button></a>
                         </form>
                         @if (isset($errors))
                             @if (count($errors) > 0)
@@ -38,21 +39,27 @@
                                 </ul>
                             @endif
                         @endif
-                        <a href="/register">Зарегистрироваться</a>
+                        
                     @endif
                 </div>
             </div>
-            <div class="col-md-2 sidebar">
+            <div class="col-md-12 sidebar">
                 <ul class="head_menu">
                     @foreach($menus as $menu)
-                        <li class="menu_link"><a class="menu_link_a" href="{{$menu['link']}}">{{$menu['text']}}</a></li>
+                        <a class="menu_link_a" href="{{$menu['link']}}"><li class="menu_link col-md-2">{{$menu['text']}}</li></a>
                     @endforeach
                 </ul>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12">
                 @yield('content')
             </div>
             
+
         </div>
+
+       <div class="footer">
+            &copy; 2016 Союз Машиностроителей Волгограда
+        </div>
+
     </body>
 </html>
