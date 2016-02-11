@@ -17,7 +17,7 @@ class AdminController extends Controller
 
     public function getIndex()
     {
-        $comments = Comments::take(5)->get();
+        $comments = Comments::paginate(10);
         foreach ($comments as $key => $comment) {
             $comment->post_id = $comment->getPostId();
             $comments[$key] = $comment;

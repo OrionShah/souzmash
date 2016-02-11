@@ -17,11 +17,12 @@
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <input type="hidden" name="user" value="{{$comment->author}}">
                     <input type="hidden" name="comment_Id" value="{{$comment->id}}">
-                    <button class="btn btn-submit" type="submit">D</button>
+                    <button class="btn btn-danger" type="submit">Удалить</button>
                 </form>
             </div>
             <div class="time col-md-6">{{ $comment->created_at }}</div>
         </div>
     @endforeach
+    {!! $comments->links() !!}
  </div>
 @endsection

@@ -5,6 +5,11 @@ div {
     float:right;
     margin: 10px;
 }
+.header {
+    font-size: 14pt;
+    text-align: left;
+    padding: 10px;
+}
 
 #pages th, #pages td {
     text-align: center;
@@ -61,4 +66,19 @@ iframe {
 .text {
     font-size: 13pt;
     text-align: justify;
+    word-wrap: break-word;
+}
+
+.sidebar {
+
+}
+
+.menu_link {
+    list-style: none;
+    font-size: 14pt;
+    border: 1px solid #ccc;
+    margin: 5px;
+    text-align: center;
+    padding: 5px;
+    color: #000;
 }

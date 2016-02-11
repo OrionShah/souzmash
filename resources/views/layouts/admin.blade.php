@@ -11,11 +11,11 @@
 		<div class="col-md-12 col-xs-12 header">Административная часть сайта</div>
 		<div class="col-md-3 col-xs-12">
 			<ul class="sibebar">
-				<li class="menu_link"><a href="/">На сайт</a></li>
-				<li class="menu_link"><a href="/admin">Доска</a></li>
-				<li class="menu_link"><a href="/admin/news">Новости</a></li>
-				<li class="menu_link"><a href="/admin/users">Пользователи</a></li>
-				<li class="menu_link"><a href="/admin/pages">Страницы</a></li>
+				<a href="/"><li class="menu_link">На сайт</li></a>
+				<a href="/admin"><li class="menu_link">Доска</li></a>
+				<a href="/admin/news"><li class="menu_link">Новости</li></a>
+				<a href="/admin/users"><li class="menu_link">Пользователи</li></a>
+				<a href="/admin/pages"><li class="menu_link">Страницы</li></a>
 			</ul>
 		</div>
 		<div class="col-md-9 col-xs-12">

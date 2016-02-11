@@ -6,8 +6,7 @@
     <a class="" href="/admin/pages/new"><button class="new_record btn btn-submit">Добавить страницу</button></a>
     <table id="pages" class="table">
         <tr>
-            <th>№</th>
-            <!-- <th>ID</th> -->
+            <th>ID</th>
             <th>Заголовок</th>
             <th>Ссылка</th>
             <th>Создано</th>
@@ -17,7 +16,7 @@
         @if($count > 0)
             @foreach($pages as $key => $page)
                 <tr>
-                    <td>{{ $key+1 }}</td>
+                    <td>{{ $page->id }}</td>
                     <td>{{$page->title}}</td>
                     <td><a href="/{{$page->link}}">{{$page->link}}</a></td>
                     <td>{{$page->created_at}}</td>
