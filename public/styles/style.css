@@ -133,6 +133,11 @@ body {
     border: 1px solid #777;
 }
 
+.post_content {
+    width: 45%;
+    margin: 2.5%;
+}
+
 #new_comment {
     margin: 15px 0;
     background-color: #fff;
