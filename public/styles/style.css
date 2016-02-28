@@ -131,11 +131,13 @@ body {
     font-size: 14pt;
     text-align: justify;
     border: 1px solid #777;
+    overflow: auto;
 }
 
 .post_content img{
     width: 45% !important;
     margin: 2.5% !important;
+    float: left;
 }
 
 #new_comment {
