@@ -133,9 +133,9 @@ body {
     border: 1px solid #777;
 }
 
-.post_content {
-    width: 45%;
-    margin: 2.5%;
+.post_content img{
+    width: 45% !important;
+    margin: 2.5% !important;
 }
 
 #new_comment {
