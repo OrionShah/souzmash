@@ -27,7 +27,8 @@
                     $image = new ImageResize($filepath);
                     $image->resizeToHeight(720);
                     $image->save($filepath);
-                    print_r($filepath . " - " . $size . "КБ \n");
+                    $new_size = intval(filesize($filepath)/1024);
+                    print_r($filepath . " - " . $size . "КБ -> " . $new_size . "КБ\n");
                 }
             }
         }
