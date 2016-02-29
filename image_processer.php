@@ -1,5 +1,12 @@
 <?php
 
+    ini_set('memory_limit', '256M');
+
+    if (!defined("MYSQL_DISABLE_CACHE")) {
+        // Без этой константы скрипт потребляет бешеное количество памяти
+        define("MYSQL_DISABLE_CACHE", 1);
+    }
+
     include "vendor/eventviva/php-image-resize/src/ImageResize.php";
 
     use \Eventviva\ImageResize;
@@ -27,6 +34,7 @@
                     $image = new ImageResize($filepath);
                     $image->resizeToHeight(720);
                     $image->save($filepath);
+                    unset($image);
                     $new_size = intval(filesize($filepath)/1024);
                     print_r($filepath . " - " . $size . "КБ -> " . $new_size . "КБ\n");
                 }
