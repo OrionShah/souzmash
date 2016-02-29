@@ -8,10 +8,7 @@
     <body>
         <div class="container">
             <div class="col-md-12">
-                <div class="col-md-3 logo">Союз машиностроителей</div>
-                <div class="col-md-6">
-                    
-                </div>
+                <div class="col-md-9 logo"></div>
                 <div class="col-md-3 user">
                     @if (Auth::check())
                         Добро пожаловать,<br>{{Auth::user()->name}}

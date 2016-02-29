@@ -5,13 +5,15 @@ body {
     font-family: Helvetica,Arial,sans-serif;
 }
 .logo {
-    font-size: 15pt;
-    text-align: center;
-    height: 100px;
+    background: url('/images/logo.png') top center no-repeat ;
+    background-size: 100% 100%;
+    padding: 65px;
+
 }
 .sidebar {
     /*border:1px solid black;*/
     /*margin: 30px 0;*/
+    margin: 15px 0;
 }
 .sidebar ul li {
     display: inline-block;
