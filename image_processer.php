@@ -39,7 +39,7 @@
                         $new_size = intval(filesize($filepath)/1024);
                         print_r($filepath . " - " . $size . "КБ -> " . $new_size . "КБ\n");
 		    } catch (Exception $e) {
-			print_r("ERROR: " . $e->getMessage() . " " . $filepath);
+			print_r("ERROR: " . $e->getMessage() . " " . $filepath . "\n");
 		    }
                 }
             }
