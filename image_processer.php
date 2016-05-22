@@ -31,12 +31,16 @@
 
                 $size = intval(filesize($filepath)/1024);
                 if ($size > 200) {
-                    $image = new ImageResize($filepath);
-                    $image->resizeToHeight(720);
-                    $image->save($filepath);
-                    unset($image);
-                    $new_size = intval(filesize($filepath)/1024);
-                    print_r($filepath . " - " . $size . "КБ -> " . $new_size . "КБ\n");
+		    try {
+                        $image = new ImageResize($filepath);
+                        $image->resizeToHeight(720);
+                        $image->save($filepath);
+                        unset($image);
+                        $new_size = intval(filesize($filepath)/1024);
+                        print_r($filepath . " - " . $size . "КБ -> " . $new_size . "КБ\n");
+		    } catch (Exception $e) {
+			print_r("ERROR: " . $e->getMessage());
+		    }
                 }
             }
         }
