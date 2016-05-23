@@ -229,6 +229,6 @@ html {
     font-size: 14pt;
 }
 
-p {
+.center_text {
     text-align:center;
 }
