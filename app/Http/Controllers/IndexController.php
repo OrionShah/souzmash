@@ -26,7 +26,7 @@ class IndexController extends Controller
     public function getIndex()
     {
         $menu = $this->menus();
-        $posts = news::where('is_publish', '=', '1')->orderBy('created_at', 'desc')->paginate(10);
+        $posts = news::where('is_publish', '=', '1')->orderBy('id', 'desc')->paginate(10);
         foreach ($posts as $key => $post) {
             if (strlen($post->content) > 500) {
                 $post->content = substr($post->content, 0, 500) . "...";
