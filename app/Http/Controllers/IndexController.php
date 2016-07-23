@@ -29,7 +29,7 @@ class IndexController extends Controller
         $posts = news::where('is_publish', '=', '1')->orderBy('id', 'desc')->paginate(10);
         foreach ($posts as $key => $post) {
             if (strlen($post->content) > 500) {
-                $post->content = substr($post->content, 0, 500) . "...";
+                $post->content = mb_substr($post->content, 0, 500) . "...";
             }
 
             $post->time = $post->created_at->format('d.m.Y H:i');
