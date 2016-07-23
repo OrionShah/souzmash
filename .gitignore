@@ -3,8 +3,8 @@
 Homestead.yaml
 Homestead.json
 .env
-/public/upload
-/public/upload/*
+./public/upload
+./public/upload/*
 /bin
 composer
 composer.lock

@@ -26,7 +26,7 @@ class NewsController extends Controller
 
     public function getIndex()
     {
-        $news = news::paginate(10);
+	$news = news::orderBy('id', 'desc')->paginate(10);
         $count = $news->count();
         foreach ($news as $new) {
             $new->author = User::find($new->author)->name;
