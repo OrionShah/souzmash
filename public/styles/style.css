@@ -114,10 +114,13 @@ body {
     margin: 5px;
 }
 
-.preview ~ .block_footer {
-    bottom: 0;
-    right: 0;
-    position: absolute;
+@media (min-width: 990px) {
+
+    .preview ~ .block_footer {
+        bottom: 0;
+        right: 0;
+        position: absolute;
+    }
 }
 
 .date {
