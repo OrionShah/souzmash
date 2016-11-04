@@ -75,6 +75,7 @@ body {
     /*border-radius: 10px;*/
     margin-bottom: 15px;
     word-wrap: break-word;
+    position: relative;
 }
 .post::after {
     clear: both;
@@ -109,8 +110,14 @@ body {
 }
 
 .block_footer {
-    /*float: right;*/
     padding: 10px;
+    margin: 5px;
+}
+
+.preview ~ .block_footer {
+    bottom: 0;
+    right: 0;
+    position: absolute;
 }
 
 .date {

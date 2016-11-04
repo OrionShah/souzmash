@@ -28,7 +28,7 @@ class IndexController extends Controller
         $menu = $this->menus();
         $posts = news::where('is_publish', '=', '1')->orderBy('id', 'desc')->paginate(10);
         foreach ($posts as $key => $post) {
-		if (strlen($post->content) > 325) {
+		if (strlen($post->content) > 350) {
                 $post->content = explode("<br>", wordwrap(strip_tags($post->content), 350, "<br>"))[0] . "...";
             }
 
